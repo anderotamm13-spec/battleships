@@ -1,4 +1,5 @@
 import socket
+import hexcode as hc
 
 def create_board():
     return [["~"] * 5 for _ in range(5)]
@@ -34,7 +35,7 @@ def main():
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         host_ip = ip #socket.gethostbyname(socket.gethostname())
-        print(f"Hosting! Your IP is: {host_ip}")
+        print(f"Hosting! Your join code is: {hc.encode(host_ip)}")
         # Binds the socket to the IP and a specific Port (5555) so it knows where to listen
         s.bind((host_ip, 5555))
         # Tells the computer to start listening for exactly 1 incoming connection request
@@ -46,7 +47,8 @@ def main():
         turn = True  # The host traditionally takes the first shot
     else:
         # --- CLIENT ROLE (The Joiner) ---
-        ip = input("Enter Host IP: ")
+        # Asks for the Host's IP (which the host sees printed on their screen)
+        ip = hc.decode(input("Enter Host IP: "))
         # Attempts to knock on the Host's door at the same Port (5555)
         s.connect((ip, 5555))
         # Sets 'conn' to the socket itself so the logic below works the same for both players
