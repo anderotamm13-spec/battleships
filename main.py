@@ -105,4 +105,7 @@ def main():
                 conn.send("MISS".encode())
                 turn = True
 
-main()
+    conn.close()
+
+if __name__ == "__main__":
+    main()
