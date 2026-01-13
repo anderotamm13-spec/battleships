@@ -44,21 +44,18 @@ def main():
         # 'conn' is the specific connection used to send/receive data
         conn, addr = s.accept()
         print(f"Connected to {addr}")
-        turn = True  # The host traditionally takes the first shot
+        turn = True
     else:
         # --- CLIENT ROLE (The Joiner) ---
-        # Asks for the Host's IP (which the host sees printed on their screen)
         ip = hc.decode(input("Enter Host IP: "))
-        # Attempts to knock on the Host's door at the same Port (5555)
         s.connect((ip, 5555))
-        # Sets 'conn' to the socket itself so the logic below works the same for both players
         conn = s
-        turn = False  # The client waits for the host to shoot first
+        turn = False
 
         # comment
 
         # --- Game Setup ---
-        # Initializes a 5x5 grid for the player's own ships ('~' represents water)
+
         my_board = create_board()
         # Initializes a separate 5x5 grid to track shots fired at the opponent
         # This stays empty until we start receiving "HIT" or "MISS" feedback
