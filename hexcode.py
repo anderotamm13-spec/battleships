@@ -1,4 +1,4 @@
-
+git
 def encode(ip):
     tmp = ip.split('.')
     output = ''
